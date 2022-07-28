@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="'http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Position report</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+</head>
+<body>
+
+    <script type="text/javascript">
+        window.onload = setupRefresh;
+
+        function setupRefresh() {
+            setTimeout("refreshPage();", 5000);
+        }
+
+        function refreshPage() {
+            window.location = location.href;
+        }
+    </script>
+    <div class="positionList" th:unless="${#lists.isEmpty(currentPositions)}">
+        <h2>Current Aircraft</h2>
+
+        <table style="border-width: 1px; border-style: solid; border-color: black">
+            <thead>
+                <tr>
+                    <th>Call sign</th>
+                    <th>Squawk</th>
+                    <th>AC Reg></th>
+                    <th>Flight #</th>
+                    <th>Route</th>
+                    <th>AC Type</th>
+                    <th>Altitude</th>
+                    <th>Heading</th>
+                    <th>Speed</th>
+                    <th>Vert Rate</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Last Seen</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ac : ${currentPositions}">
+                    <td th:text="${ac.callsign}"></td>
+                    <td th:text="${ac.squawk}"></td>
+                    <td th:text="${ac.reg}"></td>
+                    <td th:text="${ac.flightno}"></td>
+                    <td th:text="${ac.route}"></td>
+                    <td th:text="${ac.type}"></td>
+                    <td th:text="${ac.altitude}"></td>
+                    <td th:text="${ac.heading}"></td>
+                    <td th:text="${ac.speed}"></td>
+                    <td th:text="${ac.vertRate}"></td>
+                    <td th:text="${ac.lat}"></td>
+                    <td th:text="${ac.lon}"></td>
+                    <td th:text="${ac.lastSeenTime}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
